@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 //@ts-nocheck
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router';
 import axiosClient from '../ApiClient';
 

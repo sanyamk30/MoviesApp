@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 //@ts-nocheck
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axiosClient from '../ApiClient';
 
@@ -13,19 +13,19 @@ const MovieDetail = () => {
 	const [loading, setLoading] = useState(true);
 	const [movieDetail, setMovieDetail] = useState(null);
 
-	const fetchMovieById = useCallback(async () => {
-		const response = await axiosClient.get('', {
-			params: {
-				i: id
-			}
-		});
-		setMovieDetail(response.data);
-		setLoading(false);
-	}, [id]);
-
 	useEffect(() => {
+		const fetchMovieById = async () => {
+			const response = await axiosClient.get('', {
+				params: {
+					i: id
+				}
+			});
+			setMovieDetail(response.data);
+			setLoading(false);
+		};
+
 		fetchMovieById();
-	}, []);
+	}, [id]);
 
 	return movieDetail && !loading ? (
 		<div css={{ marginRight: 'auto' }}>

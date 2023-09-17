@@ -1,17 +1,16 @@
 /** @jsxImportSource @emotion/react */
 //@ts-nocheck
 
-import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import axiosClient from '../ApiClient';
 import MovieCard from '../components/MovieCard';
 import { AppContext } from '../App';
-import { debounce } from '../utils';
 import { useDebounce } from '../CustomHooks';
 
 const TOTAL_PAGES = 100;
 
 const MovieList = () => {
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const [movies, setMovies] = useState<any[]>([]);
 	const [pageNum, setPageNum] = useState(1);
 	const [lastElement, setLastElement] = useState<HTMLDivElement | null>(null);
@@ -37,26 +36,26 @@ const MovieList = () => {
 		})
 	);
 
-	const fetchMovies = useCallback(async () => {
-		setLoading(true);
-		const response = await axiosClient.get('', {
-			params: {
-				s: searchInput,
-				page: pageNum
-			}
-		});
-		const tempMovies = response.data.Search;
-		if (tempMovies) setMovies((prev) => [...prev, ...tempMovies]);
-		setLoading(false);
-	}, [pageNum, searchInput]);
-
 	useEffect(() => {
 		setMovies([]);
 		setPageNum(1);
-	}, [searchInput]);
+	}, [debouncedSearchInput]);
 
 	useEffect(() => {
-		if (pageNum <= TOTAL_PAGES) debounce(fetchMovies, 500)();
+		const fetchMovies = async () => {
+			setLoading(true);
+			const response = await axiosClient.get('', {
+				params: {
+					s: debouncedSearchInput,
+					page: pageNum
+				}
+			});
+			const tempMovies = response.data.Search;
+			if (tempMovies) setMovies((prev) => [...prev, ...tempMovies]);
+			setLoading(false);
+		};
+
+		if (pageNum <= TOTAL_PAGES && debouncedSearchInput !== '') fetchMovies();
 	}, [pageNum, debouncedSearchInput]);
 
 	useEffect(() => {

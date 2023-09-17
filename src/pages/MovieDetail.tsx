@@ -25,7 +25,7 @@ const MovieDetail = () => {
 
 	useEffect(() => {
 		fetchMovieById();
-	}, [fetchMovieById]);
+	}, []);
 
 	return movieDetail && !loading ? (
 		<div css={{ marginRight: 'auto' }}>

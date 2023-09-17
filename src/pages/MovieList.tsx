@@ -57,7 +57,7 @@ const MovieList = () => {
 
 	useEffect(() => {
 		if (pageNum <= TOTAL_PAGES) debounce(fetchMovies, 500)();
-	}, [pageNum, debouncedSearchInput, fetchMovies]);
+	}, [pageNum, debouncedSearchInput]);
 
 	useEffect(() => {
 		const currentElement = lastElement;

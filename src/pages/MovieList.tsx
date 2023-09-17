@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 //@ts-nocheck
 
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import axiosClient from '../ApiClient';
 import MovieCard from '../components/MovieCard';
 import { AppContext } from '../App';
@@ -37,7 +37,7 @@ const MovieList = () => {
 		})
 	);
 
-	const fetchMovies = async () => {
+	const fetchMovies = useCallback(async () => {
 		setLoading(true);
 		const response = await axiosClient.get('', {
 			params: {
@@ -48,7 +48,7 @@ const MovieList = () => {
 		const tempMovies = response.data.Search;
 		if (tempMovies) setMovies((prev) => [...prev, ...tempMovies]);
 		setLoading(false);
-	};
+	}, [pageNum, searchInput]);
 
 	useEffect(() => {
 		setMovies([]);
@@ -57,7 +57,7 @@ const MovieList = () => {
 
 	useEffect(() => {
 		if (pageNum <= TOTAL_PAGES) debounce(fetchMovies, 500)();
-	}, [pageNum, debouncedSearchInput]);
+	}, [pageNum, debouncedSearchInput, fetchMovies]);
 
 	useEffect(() => {
 		const currentElement = lastElement;

@@ -13,20 +13,19 @@ const MovieDetail = () => {
 	const [loading, setLoading] = useState(true);
 	const [movieDetail, setMovieDetail] = useState(null);
 
-	const fetchMovieById = async () => {
+	const fetchMovieById = useCallback(async () => {
 		const response = await axiosClient.get('', {
 			params: {
 				i: id
 			}
 		});
-		console.log(response);
 		setMovieDetail(response.data);
 		setLoading(false);
-	};
+	}, [id]);
 
 	useEffect(() => {
 		fetchMovieById();
-	}, []);
+	}, [fetchMovieById]);
 
 	return movieDetail && !loading ? (
 		<div css={{ marginRight: 'auto' }}>

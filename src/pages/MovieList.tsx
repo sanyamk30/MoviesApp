@@ -73,7 +73,7 @@ const MovieList = () => {
 		};
 	}, [lastElement]);
 
-	return (
+	return moviesToRender && moviesToRender.length > 0 ? (
 		<div
 			css={{
 				display: 'grid',
@@ -95,8 +95,10 @@ const MovieList = () => {
 				);
 			})}
 
-			{loading && <p css={{ textAlign: 'center' }}>Loading...</p>}
+			{loading && <p css={{ flex: 1, textAlign: 'center' }}>Loading...</p>}
 		</div>
+	) : (
+		<div css={{ flex: 1, textAlign: 'center', verticalAlign: 'middle' }}>{loading ? 'Loading...' : 'No movies to show. Search to get started'}</div>
 	);
 };
 

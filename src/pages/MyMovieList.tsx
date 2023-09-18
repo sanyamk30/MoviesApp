@@ -24,7 +24,7 @@ const MyMovieList = () => {
 			))}
 		</div>
 	) : (
-		<p css={{ textAlign: 'center' }}>No Movies in your list</p>
+		<div css={{ flex: 1, textAlign: 'center', verticalAlign: 'middle' }}>No Movies in your list</div>
 	);
 };
 

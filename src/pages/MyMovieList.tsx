@@ -11,9 +11,12 @@ const MyMovieList = () => {
 		<div
 			css={{
 				display: 'grid',
-				gridTemplateColumns: 'repeat(3,1fr)',
-				gridGap: '16px',
-				margin: '16px auto'
+				gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+				gridGap: '8px',
+
+				'@media (max-width: 768px)': {
+					gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))'
+				}
 			}}
 		>
 			{myMovies.map((movie, index) => (

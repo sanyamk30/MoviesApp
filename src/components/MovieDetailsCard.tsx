@@ -55,25 +55,126 @@ const MovieDetailsCard = (props: MovieDetailsCardProps) => {
 	};
 
 	return (
-		<div css={{ display: 'flex', flexDirection: 'row', margin: '24px', padding: '16px' }}>
-			<div css={{ height: '700px', width: '500px' }}>
-				<img src={Poster} alt={Title} css={{ objectFit: 'contain', height: '700px', width: '500px' }} />
+		<div
+			css={{
+				display: 'flex',
+				flexDirection: 'row',
+				margin: '24px',
+				padding: '16px',
+				justifyContent: 'space-between'
+			}}
+		>
+			<div
+				css={{
+					height: '700px',
+					width: '500px',
+					border: '1px solid #ccc'
+				}}
+			>
+				<img
+					src={Poster}
+					alt={Title}
+					css={{
+						objectFit: 'contain',
+						height: '700px',
+						width: '500px'
+					}}
+				/>
 			</div>
 
-			<div css={{ display: 'flex', flexDirection: 'column', flexGrow: 1, marginLeft: '24px', padding: '16px' }}>
-				<h2>{Title}</h2>
+			<div
+				css={{
+					display: 'flex',
+					flexDirection: 'column',
+					flexGrow: 1,
+					marginLeft: '24px',
+					padding: '16px'
+				}}
+			>
+				<h2
+					css={{
+						fontSize: '24px'
+					}}
+				>
+					{Title}
+				</h2>
 
-				<p>Year : {Year}</p>
-				<p>Actors : {Actors}</p>
-				<p>Country : {Country}</p>
-				<p>Director : {Director}</p>
-				<p>Genre : {Genre}</p>
-				<p>Plot : {Plot}</p>
-				<p>Writer : {Writer}</p>
-				<p>IMDB Rating : {imdbRating}</p>
-				<p>IMDB Votes : {imdbVotes}</p>
+				<p
+					css={{
+						fontSize: '16px'
+					}}
+				>
+					Year : {Year}
+				</p>
+				<p
+					css={{
+						fontSize: '16px'
+					}}
+				>
+					Actors : {Actors}
+				</p>
+				<p
+					css={{
+						fontSize: '16px'
+					}}
+				>
+					Country : {Country}
+				</p>
+				<p
+					css={{
+						fontSize: '16px'
+					}}
+				>
+					Director : {Director}
+				</p>
+				<p
+					css={{
+						fontSize: '16px'
+					}}
+				>
+					Genre : {Genre}
+				</p>
+				<p
+					css={{
+						fontSize: '16px'
+					}}
+				>
+					Plot : {Plot}
+				</p>
+				<p
+					css={{
+						fontSize: '16px'
+					}}
+				>
+					Writer : {Writer}
+				</p>
+				<p
+					css={{
+						fontSize: '16px'
+					}}
+				>
+					IMDB Rating : {imdbRating}
+				</p>
+				<p
+					css={{
+						fontSize: '16px'
+					}}
+				>
+					IMDB Votes : {imdbVotes}
+				</p>
 
-				<button onClick={handleClick}>{!isPresent ? 'Add to My List' : 'Remove from my List'}</button>
+				<button
+					css={{
+						backgroundColor: '##fff',
+						borderRadius: '4px',
+						padding: '8px 16px',
+						boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+						alignSelf: 'flex-start'
+					}}
+					onClick={handleClick}
+				>
+					{!isPresent ? 'Add to My List' : 'Remove from my List'}
+				</button>
 			</div>
 		</div>
 	);

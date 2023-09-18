@@ -18,7 +18,6 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.response.use(
 	function (response) {
-		console.log(response);
 		const apiRes = response.data.Response;
 		if (apiRes === 'False') {
 			alert(response.data.Error);

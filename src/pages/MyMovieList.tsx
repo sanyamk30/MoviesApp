@@ -7,7 +7,7 @@ import MovieCard from '../components/MovieCard';
 const MyMovieList = () => {
 	const myMovies = JSON.parse(localStorage.getItem('myMovies'));
 
-	return myMovies.length > 0 ? (
+	return myMovies && myMovies.length > 0 ? (
 		<div
 			css={{
 				display: 'grid',

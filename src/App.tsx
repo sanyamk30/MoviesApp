@@ -43,9 +43,11 @@ function App() {
 						}
 					`}
 				></Global>
-				<div css={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+				<div css={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 					<NavBar></NavBar>
-					<Outlet />
+					<div css={{ overflowY: 'auto' }}>
+						<Outlet />
+					</div>
 				</div>
 			</AppContext.Provider>
 		</ErrorBoundary>

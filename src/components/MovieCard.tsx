@@ -18,7 +18,7 @@ const MovieCard = (props: MovieCardProps) => {
 	};
 
 	return (
-		<div css={{ display: 'flex', flexDirection: 'column', height: '500px', width: '300px', justifyContent: 'space-between', cursor: 'pointer' }} onClick={handleClick}>
+		<div css={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', cursor: 'pointer' }} onClick={handleClick}>
 			<img src={poster} alt={title} css={{ objectFit: 'contain', height: '500px', width: '300px' }}></img>
 			<h3>{`${title} (${year})`}</h3>
 		</div>

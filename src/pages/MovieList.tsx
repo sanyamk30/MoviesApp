@@ -77,9 +77,12 @@ const MovieList = () => {
 		<div
 			css={{
 				display: 'grid',
-				gridTemplateColumns: 'repeat(3,1fr)',
-				gridGap: '16px',
-				margin: 'auto'
+				gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+				gridGap: '8px',
+
+				'@media (max-width: 768px)': {
+					gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))'
+				}
 			}}
 		>
 			{moviesToRender.map((movie, index) => {

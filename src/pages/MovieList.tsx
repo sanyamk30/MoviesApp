@@ -1,22 +1,13 @@
 /** @jsxImportSource @emotion/react */
-//@ts-nocheck
+// @ts-nocheck
 
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
-import axiosClient from '../ApiClient';
+import { useContext, useMemo } from 'react';
 import MovieCard from '../components/MovieCard';
 import { AppContext } from '../App';
-import { useDebounce } from '../CustomHooks';
-
-const TOTAL_PAGES = 100;
+import { TOTAL_PAGES } from '../constants';
 
 const MovieList = () => {
-	const [loading, setLoading] = useState(false);
-	const [movies, setMovies] = useState<any[]>([]);
-	const [pageNum, setPageNum] = useState(1);
-	const [lastElement, setLastElement] = useState<HTMLDivElement | null>(null);
-
-	const { myMovies, searchInput } = useContext(AppContext);
-	const debouncedSearchInput = useDebounce(searchInput);
+	const { myMovies, loading, pageNum, movies, setLastElement } = useContext(AppContext);
 
 	const moviesToRender = useMemo(() => {
 		const idsToFilter = myMovies.map((movie) => movie.imdbID);
@@ -25,53 +16,6 @@ const MovieList = () => {
 
 		return filteredMovies;
 	}, [movies, myMovies]);
-
-	const observer = useRef(
-		new IntersectionObserver((entries) => {
-			const first = entries[0];
-
-			if (first.isIntersecting) {
-				setPageNum((prev) => prev + 1);
-			}
-		})
-	);
-
-	useEffect(() => {
-		setMovies([]);
-		setPageNum(1);
-	}, [debouncedSearchInput]);
-
-	useEffect(() => {
-		const fetchMovies = async () => {
-			setLoading(true);
-			const response = await axiosClient.get('', {
-				params: {
-					s: debouncedSearchInput,
-					page: pageNum
-				}
-			});
-			const tempMovies = response.data.Search;
-			if (tempMovies) setMovies((prev) => [...prev, ...tempMovies]);
-			setLoading(false);
-		};
-
-		if (pageNum <= TOTAL_PAGES && debouncedSearchInput !== '') fetchMovies();
-	}, [pageNum, debouncedSearchInput]);
-
-	useEffect(() => {
-		const currentElement = lastElement;
-		const currentObserver = observer.current;
-
-		if (currentElement) {
-			currentObserver.observe(currentElement);
-		}
-
-		return () => {
-			if (currentElement) {
-				currentObserver.unobserve(currentElement);
-			}
-		};
-	}, [lastElement]);
 
 	return moviesToRender && moviesToRender.length > 0 ? (
 		<div

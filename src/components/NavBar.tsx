@@ -66,25 +66,27 @@ const NavBar = () => {
 				))}
 			</nav>
 
-			<div
-				css={{
-					display: 'flex',
-					width: '50%',
-					alignItems: 'center'
-				}}
-			>
-				<input
-					placeholder="Search"
-					value={searchInput}
-					onChange={handleInputChange}
+			{`/${navItems[0].route}` === location.pathname && (
+				<div
 					css={{
-						width: '100%',
-						padding: '8px',
-						fontSize: '16px',
-						borderRadius: '8px'
+						display: 'flex',
+						width: '50%',
+						alignItems: 'center'
 					}}
-				/>
-			</div>
+				>
+					<input
+						placeholder="Search"
+						value={searchInput}
+						onChange={handleInputChange}
+						css={{
+							width: '100%',
+							padding: '8px',
+							fontSize: '16px',
+							borderRadius: '8px'
+						}}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };

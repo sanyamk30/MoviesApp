@@ -84,7 +84,7 @@ function App() {
 
 	return (
 		<ErrorBoundary fallback={<p css={{ textAlign: 'center' }}>Something went wrong</p>}>
-			<AppContext.Provider value={{ movies, myMovies, filterFromMyMovies, setSearchInput, loading, pageNum, setLastElement }}>
+			<AppContext.Provider value={{ movies, myMovies, filterFromMyMovies, searchInput, setSearchInput, loading, pageNum, setLastElement }}>
 				<Global
 					styles={css`
 						body {

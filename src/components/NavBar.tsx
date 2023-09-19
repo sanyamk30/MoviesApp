@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useContext } from 'react';
 import { routes } from '../routes';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AppContext } from '../App';
 
 const navItems = [
@@ -17,6 +17,7 @@ const navItems = [
 
 const NavBar = () => {
 	const { searchInput, setSearchInput } = useContext(AppContext);
+	const location = useLocation();
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchInput(event.target.value);
@@ -41,8 +42,24 @@ const NavBar = () => {
 		>
 			<nav css={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
 				{navItems.map((item, index) => (
-					<li css={{ marginRight: '8px', padding: '8px', listStyle: 'none' }} key={index}>
-						<Link to={item.route} css={{ color: '#fff', textDecoration: 'none', fontSize: '24px', fontWeight: 'bold' }}>
+					<li
+						css={{
+							marginRight: '8px',
+							padding: '8px',
+							listStyle: 'none',
+							':hover': { cursor: 'pointer' }
+						}}
+						key={index}
+					>
+						<Link
+							to={item.route}
+							css={{
+								textDecoration: 'none',
+								fontSize: '24px',
+								fontWeight: 'bold',
+								...(`/${item.route}` === location.pathname ? { color: 'red' } : { color: '#fff' })
+							}}
+						>
 							{item.label}
 						</Link>
 					</li>
